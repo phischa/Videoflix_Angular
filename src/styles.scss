@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tailwind Base Imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+@layer base {
+    body {
+        @apply bg-black text-white antialiased;
+    }
+}
