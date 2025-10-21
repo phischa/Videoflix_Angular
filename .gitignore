@@ -42,5 +42,5 @@ testem.log
 Thumbs.db
 
 # AI Configuration (Claude)
-/claude
+/.claude
 ClAUDE.md
