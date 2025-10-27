@@ -11,14 +11,13 @@ export const routes: Routes = [
         title: 'Videoflix - Stream die besten Filme'
     },
 
-    // TODO: Auth Routes (will create later)
-    // {
-    //   path: 'login',
-    //   loadComponent: () => import('./features/auth/login/login')
-    //     .then(m => m.LoginComponent),
-    //   canActivate: [guestGuard],
-    //   title: 'Login - Videoflix'
-    // },
+    {
+    path: 'login',
+    loadComponent: () => import('./features/auth/login/login')
+    .then(m => m.LoginComponent),
+    canActivate: [guestGuard],
+    title: 'Login - Videoflix'
+    },
 
     // Fallback - 404
     {
