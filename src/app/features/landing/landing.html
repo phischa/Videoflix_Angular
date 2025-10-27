@@ -1,1 +1,75 @@
-<p>landing works!</p>
+<!-- Hero Section mit Background -->
+<div class="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat relative"
+    style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 1) 100%), url('/assets/images/index_bg.jpg');">
+
+    <!-- Header -->
+    <header class="w-full flex items-center justify-between px-12 py-12 lg:px-16 xl:px-24">
+        <!-- Logo -->
+        <a routerLink="/" class="flex items-center" aria-label="Videoflix Homepage">
+            <!-- Mobile Logo (klein) -->
+            <img src="/assets/icons/logo_icon_small.svg" alt="Videoflix Logo" class="h-7 md:hidden">
+            <!-- Desktop Logo (groß) -->
+            <img src="/assets/icons/logo_icon.svg" alt="Videoflix Logo" class="h-7 hidden md:block">
+        </a>
+
+        <!-- Login Button -->
+        <div class="flex items-center gap-4">
+            <a routerLink="/login" class="btn-primary px-6 py-2.5">
+                Log in
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content (zentriert) -->
+    <main class="flex-1 flex items-center justify-center px-6">
+        <section class="flex flex-col items-center gap-8 text-center max-w-3xl">
+            <!-- Heading -->
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+                Movies, TV shows, and more
+            </h1>
+
+            <!-- Subheading -->
+            <p class="text-lg md:text-xl text-white">
+                Enter your email to create or restart your subscription.
+            </p>
+
+            <!-- Email Form -->
+            <form (ngSubmit)="onSignUp()" class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+
+                <!-- Email Input -->
+                <div class="w-full md:w-auto">
+                    <label for="email" class="sr-only">Email Address</label>
+                    <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email Address" required
+                        autocomplete="email" class="w-full md:w-[350px] px-5 py-3 
+                   bg-black/40 border-2 border-white 
+                   rounded-full text-white placeholder-white
+                   focus:outline-none focus:ring-2 focus:ring-videoflix-red
+                   transition-all duration-200">
+                </div>
+
+                <!-- Sign Up Button -->
+                <button type="submit"
+                    class="btn-primary px-6 py-3 flex items-center gap-2 w-full md:w-auto justify-center">
+                    Sign Up
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full flex items-center justify-center gap-8 px-12 py-12 lg:px-16">
+        <nav class="flex items-center gap-8">
+            <a routerLink="/privacy"
+                class="text-white hover:text-videoflix-red-light transition-colors duration-200 underline">
+                Privacy Policy
+            </a>
+            <a routerLink="/imprint"
+                class="text-white hover:text-videoflix-red-light transition-colors duration-200 underline">
+                Imprint
+            </a>
+        </nav>
+    </footer>
+</div>

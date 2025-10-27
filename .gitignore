@@ -44,3 +44,8 @@ Thumbs.db
 # AI Configuration (Claude)
 /.claude
 ClAUDE.md
+
+# Large background images - compress before committing
+src/assets/images/*.jpg
+src/assets/images/*.jfif
+src/assets/images/*.png
