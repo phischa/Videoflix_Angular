@@ -1,0 +1,186 @@
+<!-- Register Page with Background -->
+<div class="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat"
+    style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8) -27.44%, rgba(0, 0, 0, 0.44) 44.23%, rgba(0, 0, 0, 0.8) 100%), url('/assets/images/sign_up_bg.jpg');">
+
+    <!-- Header -->
+    <header class="w-full flex items-center justify-between px-12 py-12 lg:px-16">
+        <a routerLink="/login" aria-label="login page">
+            <img src="/assets/icons/logo_icon_small.svg" alt="Videoflix Logo" class="h-7 md:hidden">
+            <img src="/assets/icons/logo_icon.svg" alt="Videoflix Logo" class="h-7 hidden md:block">
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center px-6 py-8">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
+            class="w-full max-w-lg bg-videoflix-gray/95 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-videoflix-gray-light flex flex-col gap-6">
+
+            <!-- Heading -->
+            <h1 class="text-videoflix-red text-3xl font-bold">Sign up</h1>
+
+            <!-- Email Input -->
+            <div class="relative">
+                <div class="flex items-center gap-3 bg-videoflix-dark border-2 rounded-lg px-4 py-3 transition-all duration-200"
+                    [class.border-videoflix-gray-light]="!email?.invalid || !email?.touched"
+                    [class.border-red-500]="email?.invalid && email?.touched">
+
+                    <img src="/assets/icons/mail.png" alt="Email icon" class="w-5 h-5 opacity-70">
+
+                    <div class="flex-1 relative">
+                        <input type="email" formControlName="email" id="email" autocomplete="email"
+                            class="w-full bg-transparent text-white outline-none peer placeholder-transparent"
+                            placeholder="Email">
+                        <label for="email" class="absolute left-0 -top-5 text-gray-400 text-sm transition-all duration-200
+                     peer-placeholder-shown:text-base peer-placeholder-shown:top-0 peer-placeholder-shown:text-gray-500
+                     peer-focus:-top-5 peer-focus:text-sm peer-focus:text-videoflix-red">
+                            Email
+                        </label>
+                    </div>
+                </div>
+
+                <p *ngIf="email?.invalid && email?.touched" class="text-red-500 text-sm mt-1 flex items-center gap-2">
+                    <img src="/assets/images/warning.png" alt="Warning" class="w-4 h-4">
+                    Please enter a valid email address.
+                </p>
+            </div>
+
+            <!-- Password Input -->
+            <div class="relative">
+                <div class="flex items-center gap-3 bg-videoflix-dark border-2 rounded-lg px-4 py-3 transition-all duration-200"
+                    [class.border-videoflix-gray-light]="!password?.invalid || !password?.touched"
+                    [class.border-red-500]="password?.invalid && password?.touched">
+
+                    <img src="/assets/icons/password.png" alt="Password icon" class="w-5 h-5 opacity-70">
+
+                    <div class="flex-1 relative">
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" id="password"
+                            autocomplete="new-password"
+                            class="w-full bg-transparent text-white outline-none peer placeholder-transparent pr-8"
+                            placeholder="Password">
+                        <label for="password" class="absolute left-0 -top-5 text-gray-400 text-sm transition-all duration-200
+                     peer-placeholder-shown:text-base peer-placeholder-shown:top-0 peer-placeholder-shown:text-gray-500
+                     peer-focus:-top-5 peer-focus:text-sm peer-focus:text-videoflix-red">
+                            Password
+                        </label>
+                    </div>
+
+                    <button type="button" (click)="togglePasswordVisibility()"
+                        class="absolute right-4 opacity-70 hover:opacity-100 transition-opacity">
+                        <img src="/assets/icons/visibility.svg" alt="Toggle password" class="w-5 h-5">
+                    </button>
+                </div>
+
+                <p *ngIf="password?.invalid && password?.touched"
+                    class="text-red-500 text-sm mt-1 flex items-center gap-2">
+                    <img src="/assets/images/warning.png" alt="Warning" class="w-4 h-4">
+                    Password must be at least 8 characters long.
+                </p>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="relative">
+                <div class="flex items-center gap-3 bg-videoflix-dark border-2 rounded-lg px-4 py-3 transition-all duration-200"
+                    [class.border-videoflix-gray-light]="!passwordsDoNotMatch"
+                    [class.border-red-500]="passwordsDoNotMatch">
+
+                    <img src="/assets/icons/password.png" alt="Password icon" class="w-5 h-5 opacity-70">
+
+                    <div class="flex-1 relative">
+                        <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmed_password"
+                            id="confirmed_password" autocomplete="new-password"
+                            class="w-full bg-transparent text-white outline-none peer placeholder-transparent pr-8"
+                            placeholder="Confirm password">
+                        <label for="confirmed_password" class="absolute left-0 -top-5 text-gray-400 text-sm transition-all duration-200
+                     peer-placeholder-shown:text-base peer-placeholder-shown:top-0 peer-placeholder-shown:text-gray-500
+                     peer-focus:-top-5 peer-focus:text-sm peer-focus:text-videoflix-red">
+                            Confirm password
+                        </label>
+                    </div>
+
+                    <button type="button" (click)="toggleConfirmPasswordVisibility()"
+                        class="absolute right-4 opacity-70 hover:opacity-100 transition-opacity">
+                        <img src="/assets/icons/visibility.svg" alt="Toggle password" class="w-5 h-5">
+                    </button>
+                </div>
+
+                <p *ngIf="passwordsDoNotMatch" class="text-red-500 text-sm mt-1 flex items-center gap-2">
+                    <img src="/assets/images/warning.png" alt="Warning" class="w-4 h-4">
+                    Passwords do not match.
+                </p>
+            </div>
+
+            <!-- Privacy Policy Checkbox -->
+            <div class="relative mt-2">
+                <label class="flex items-start gap-3 cursor-pointer group">
+                    <div class="relative flex-shrink-0 mt-0.5">
+                        <input type="checkbox" formControlName="privacy_policy" id="privacy_policy"
+                            class="peer sr-only">
+                        <div class="w-5 h-5 border-2 border-videoflix-gray-light rounded bg-videoflix-dark
+                        peer-checked:bg-videoflix-red peer-checked:border-videoflix-red
+                        transition-all duration-200 flex items-center justify-center">
+                            <svg *ngIf="privacy_policy?.value" class="w-3 h-3 text-white" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="text-white text-sm">
+                        Please accept the
+                        <a routerLink="/privacy" (click)="$event.stopPropagation()"
+                            class="text-videoflix-red-light hover:text-videoflix-red underline">
+                            Privacy Policy
+                        </a>
+                    </span>
+                </label>
+
+                <p *ngIf="privacy_policy?.invalid && privacy_policy?.touched"
+                    class="text-red-500 text-sm mt-1 flex items-center gap-2">
+                    <img src="/assets/images/warning.png" alt="Warning" class="w-4 h-4">
+                    Must accept the privacy policy to continue.
+                </p>
+            </div>
+
+            <!-- Error Message -->
+            <p *ngIf="errorMessage" class="text-red-500 text-base text-center">
+                {{ errorMessage }}
+            </p>
+
+            <!-- Submit Button -->
+            <div class="flex flex-col md:flex-row gap-4">
+                <button type="submit" [disabled]="isSubmitting"
+                    class="btn-primary py-3 text-lg flex-1 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span *ngIf="!isSubmitting">Get started</span>
+                    <span *ngIf="isSubmitting" class="flex items-center justify-center gap-2">
+                        <div class="spinner w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin">
+                        </div>
+                        Creating account...
+                    </span>
+                </button>
+            </div>
+
+            <!-- Login Link -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-2 text-center">
+                <p class="text-white">Already have an account?</p>
+                <a routerLink="/login"
+                    class="text-videoflix-red-light hover:text-videoflix-red font-bold transition-colors duration-200 underline">
+                    Log in
+                </a>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full flex items-center justify-center gap-8 px-12 py-12">
+        <nav class="flex items-center gap-8">
+            <a routerLink="/privacy" aria-label="privacy policy page"
+                class="text-white hover:text-videoflix-red-light transition-colors duration-200 underline">
+                Privacy Policy
+            </a>
+            <a routerLink="/imprint" aria-label="imprint page"
+                class="text-white hover:text-videoflix-red-light transition-colors duration-200 underline">
+                Imprint
+            </a>
+        </nav>
+    </footer>
+</div>
