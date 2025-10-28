@@ -19,6 +19,14 @@ export const routes: Routes = [
     title: 'Login - Videoflix'
     },
 
+    {
+    path: 'register',
+    loadComponent: () => import('./features/auth/register/register')
+    .then(m => m.RegisterComponent),
+    canActivate: [guestGuard],
+    title: 'Register- Videoflix'
+    },
+
     // Fallback - 404
     {
         path: '**',

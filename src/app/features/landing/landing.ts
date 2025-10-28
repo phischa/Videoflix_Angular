@@ -13,13 +13,16 @@ import { FormsModule } from '@angular/forms';
 export class LandingComponent {
   email: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  onSignUp() {
+  onSignUp(event?: Event) {
+    if (event) {
+      event.preventDefault();  // ← Stop native submit!
+    }
+
     if (this.email) {
-      // Navigiere zu Register mit Email as Query-Parameter
-      this.router.navigate(['/register'], { 
-        queryParams: { email: this.email } 
+      this.router.navigate(['/register'], {
+        queryParams: { email: this.email }
       });
     }
   }
