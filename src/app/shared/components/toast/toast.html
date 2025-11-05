@@ -1,0 +1,33 @@
+<!-- 
+  Toast Component Template
+  Entspricht: getToastHTML() aus ui_helper.js Line 85-108
+  
+  Zeigt Toast-Nachrichten (Success/Error) an
+  Verschwindet automatisch nach 3 Sekunden
+-->
+
+<div class="toast-container">
+    @for (toast of toasts; track toast.id) {
+    <div class="toast_msg d_flex_cc_gm" [attr.error]="toast.type === 'error'">
+        <!-- Left Side: Icon - EXAKT wie Vanilla Line 98-100 -->
+        <div class="toast_msg_left d_flex_cc_gm">
+            @if (toast.type === 'error') {
+            <img src="assets/icons/error.svg" alt="Error" width="24" height="24">
+            } @else {
+            <img src="assets/icons/check_circle.svg" alt="Success" width="24" height="24">
+            }
+        </div>
+
+        <!-- Right Side: Title & Messages - EXAKT wie Vanilla Line 101-107 -->
+        <div class="toast_msg_right">
+            <h3 [attr.error]="false">Success</h3>
+            <h3 [attr.error]="true">Error</h3>
+            <ul class="w_full">
+                @for (message of toast.messages; track $index) {
+                <li>{{ message }}</li>
+                }
+            </ul>
+        </div>
+    </div>
+    }
+</div>
