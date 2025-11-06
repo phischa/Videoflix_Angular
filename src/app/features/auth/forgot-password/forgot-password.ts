@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@core/services/auth.service';
-import { ToastService } from '@core/services/toast.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 /**
  * Forgot Password Component
@@ -67,7 +67,7 @@ export class ForgotPasswordComponent implements OnInit {
      * Entspricht: forgotEmailSubmit(event) aus auth.js Line 51-56
      * und forgetEmail(data) aus auth.js Line 63-72
      */
-    async onSubmit(): Promise<void> {
+    onSubmit(): void {
         // Entspricht: setError(false, "forgot_email_group");
         this.emailControl.markAsUntouched();
 
@@ -79,29 +79,29 @@ export class ForgotPasswordComponent implements OnInit {
         this.isSubmitting = true;
         const email = this.emailControl.value.trim();
 
-        try {
-            // Entspricht: let response = await postData(FORGET_PASSWORD_URL, data);
-            await this.authService.requestPasswordReset({ email });
+        // Entspricht: let response = await postData(FORGET_PASSWORD_URL, data);
+        this.authService.requestPasswordReset(email).subscribe({
+            next: () => {
+                // Entspricht: showToastAndRedirect(false, ["Password reset email sent!..."], "../auth/login.html", TOAST_DURATION);
+                this.toastService.showSuccess([
+                    'Password reset email sent! Please check your inbox.'
+                ]);
 
-            // Entspricht: showToastAndRedirect(false, ["Password reset email sent!..."], "../auth/login.html", TOAST_DURATION);
-            this.toastService.showSuccess([
-                'Password reset email sent! Please check your inbox.'
-            ]);
+                // Redirect nach 3000ms (TOAST_DURATION aus config.js)
+                setTimeout(() => {
+                    this.router.navigate(['/login']);
+                }, 3000);
 
-            // Redirect nach 3000ms (TOAST_DURATION aus config.js)
-            setTimeout(() => {
-                this.router.navigate(['/login']);
-            }, 3000);
-
-        } catch (error: any) {
-            // Entspricht: setError(true, "forgot_email_group"); + showToastMessage(true, errorArr);
-            this.emailControl.setErrors({ 'serverError': true });
-            const errorMessages = this.extractErrorMessages(error.error);
-            this.toastService.showError(errorMessages);
-
-        } finally {
-            this.isSubmitting = false;
-        }
+                this.isSubmitting = false;
+            },
+            error: (error: any) => {
+                // Entspricht: setError(true, "forgot_email_group"); + showToastMessage(true, errorArr);
+                this.emailControl.setErrors({ 'serverError': true });
+                const errorMessages = this.extractErrorMessages(error.error);
+                this.toastService.showError(errorMessages);
+                this.isSubmitting = false;
+            }
+        });
     }
 
     /**

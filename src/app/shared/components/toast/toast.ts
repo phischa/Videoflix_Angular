@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
-import { ToastService, Toast } from '@core/services/toast.service';
+import { ToastService, Toast } from '../../../core/services/toast.service';
 
 /**
  * Toast Component
@@ -46,7 +46,7 @@ export class ToastComponent implements OnInit, OnDestroy {
         // Entferne Toast nach 3000ms (TOAST_DURATION aus config.js)
         setTimeout(() => {
             this.removeToast(toast.id);
-        }, 3000);
+        }, 300000);
     }
 
     /**

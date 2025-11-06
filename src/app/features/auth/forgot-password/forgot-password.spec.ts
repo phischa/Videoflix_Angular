@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 import { ForgotPasswordComponent } from './forgot-password';
-import { AuthService } from '@core/services/auth.service';
-import { ToastService } from '@core/services/toast.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 describe('ForgotPasswordComponent', () => {
     let component: ForgotPasswordComponent;
@@ -53,21 +54,22 @@ describe('ForgotPasswordComponent', () => {
         expect(emailControl.valid).toBeTrue();
     });
 
-    it('should not submit if form is invalid', async () => {
+    it('should not submit if form is invalid', () => {
         component.emailControl.setValue('');
-        await component.onSubmit();
+        component.onSubmit();
 
         expect(authService.requestPasswordReset).not.toHaveBeenCalled();
     });
 
-    it('should call authService on valid submit', async () => {
-        authService.requestPasswordReset.and.returnValue(Promise.resolve());
+    it('should call authService on valid submit', (done) => {
+        authService.requestPasswordReset.and.returnValue(of({}));
         component.emailControl.setValue('test@example.com');
 
-        await component.onSubmit();
+        component.onSubmit();
 
-        expect(authService.requestPasswordReset).toHaveBeenCalledWith({
-            email: 'test@example.com'
-        });
+        setTimeout(() => {
+            expect(authService.requestPasswordReset).toHaveBeenCalledWith('test@example.com');
+            done();
+        }, 100);
     });
 });
