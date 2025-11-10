@@ -39,7 +39,7 @@ export const routes: Routes = [
         loadComponent: () => import('./features/auth/confirm-password/confirm-password')
             .then(m => m.ConfirmPasswordComponent),
         title: 'Passwort zurücksetzen - Videoflix'
-    }
+    },
 
     // Fallback - 404
     {
