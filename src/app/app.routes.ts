@@ -40,7 +40,24 @@ export const routes: Routes = [
             .then(m => m.ConfirmPasswordComponent),
         title: 'Passwort zurücksetzen - Videoflix'
     },
-
+    {
+        path: 'activate',
+        loadComponent: () => import('./features/auth/activate/activate')
+            .then(m => m.ActivateComponent),
+        title: 'Account aktivieren - Videoflix'
+    },
+    {
+        path: 'privacy',
+        loadComponent: () => import('./shared/components/privacy/privacy')
+            .then(m => m.PrivacyComponent),
+        title: 'Datenschutz - Videoflix'
+    },
+    {
+        path: 'imprint',
+        loadComponent: () => import('./shared/components/imprint/imprint')
+            .then(m => m.ImprintComponent),
+        title: 'Impressum - Videoflix'
+    },
     // Fallback - 404
     {
         path: '**',
