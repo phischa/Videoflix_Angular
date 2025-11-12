@@ -1,0 +1,106 @@
+<!-- Account Activation Page with Background -->
+<div class="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat"
+    style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8) -27.44%, rgba(0, 0, 0, 0.44) 44.23%, rgba(0, 0, 0, 0.8) 100%), url('/assets/images/33031bc99687aa3a9f9377f5bacdb640.jfif');">
+
+    <!-- Header -->
+    <header class="w-full flex items-center justify-between px-12 py-12 lg:px-16">
+        <a routerLink="/login" aria-label="login page">
+            <img src="/assets/icons/logo_icon_small.svg" alt="Videoflix Logo" class="h-7 md:hidden">
+            <img src="/assets/icons/logo_icon.svg" alt="Videoflix Logo" class="h-7 hidden md:block">
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center px-6">
+        <div class="w-full max-w-md bg-videoflix-gray/95 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-videoflix-gray-light flex flex-col items-center gap-8">
+
+            <!-- Processing State -->
+            <div *ngIf="activationStatus === 'processing'" class="flex flex-col items-center gap-6">
+                <h1 class="text-videoflix-red text-3xl font-bold text-center">Activating Account</h1>
+                
+                <!-- Spinner -->
+                <div class="flex items-center justify-center">
+                    <div class="w-16 h-16 border-4 border-videoflix-gray-light border-t-videoflix-red rounded-full animate-spin">
+                    </div>
+                </div>
+                
+                <p class="text-white text-center">
+                    {{ activationMessage }}
+                </p>
+            </div>
+
+            <!-- Success State -->
+            <div *ngIf="activationStatus === 'success'" class="flex flex-col items-center gap-6">
+                <h1 class="text-green-500 text-3xl font-bold text-center">Account Activated!</h1>
+                
+                <!-- Success Icon -->
+                <div class="flex items-center justify-center">
+                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <p class="text-white text-center">
+                    {{ activationMessage }}
+                </p>
+                
+                <p class="text-gray-400 text-sm text-center">
+                    Redirecting to login page...
+                </p>
+            </div>
+
+            <!-- Error State -->
+            <div *ngIf="activationStatus === 'error'" class="flex flex-col items-center gap-6">
+                <h1 class="text-red-500 text-3xl font-bold text-center">Activation Failed</h1>
+                
+                <!-- Error Icon -->
+                <div class="flex items-center justify-center">
+                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <p class="text-white text-center">
+                    {{ activationMessage }}
+                </p>
+                
+                <div class="flex flex-col gap-4 w-full">
+                    <!-- Retry Button -->
+                    <button (click)="retry()" 
+                            class="btn-primary py-3 text-lg">
+                        Try Again
+                    </button>
+
+                    <!-- Back to Login -->
+                    <a routerLink="/login"
+                        class="text-videoflix-red-light hover:text-videoflix-red font-bold text-center transition-colors duration-200 underline">
+                        Back to Login
+                    </a>
+                </div>
+                
+                <p class="text-gray-400 text-sm text-center">
+                    Redirecting in 5 seconds...
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full flex items-center justify-center gap-8 px-12 py-12">
+        <nav class="flex items-center gap-8">
+            <a routerLink="/privacy" aria-label="privacy policy page"
+                class="text-white hover:text-videoflix-red-light transition-colors duration-200 underline">
+                Privacy Policy
+            </a>
+            <a routerLink="/imprint" aria-label="imprint page"
+                class="text-white hover:text-videoflix-red-light transition-colors duration-200 underline">
+                Imprint
+            </a>
+        </nav>
+    </footer>
+</div>
