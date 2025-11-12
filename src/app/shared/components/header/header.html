@@ -1,0 +1,26 @@
+<!-- Header Component - Video Dashboard Navigation -->
+<header
+    class="fixed top-0 left-0 right-0 z-40 bg-gradient-to-b from-black/90 to-transparent backdrop-blur-sm transition-all duration-300">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Logo -->
+        <a routerLink="/videos" class="flex items-center" aria-label="Videoflix Home">
+            <!-- Desktop Logo -->
+            <img src="/assets/icons/logo_icon.svg" alt="Videoflix Logo"
+                class="h-8 hidden md:block hover:opacity-80 transition-opacity">
+
+            <!-- Mobile Logo -->
+            <img src="/assets/icons/logo_icon_small.svg" alt="Videoflix"
+                class="h-8 md:hidden hover:opacity-80 transition-opacity">
+        </a>
+
+        <!-- Right Side: Logout Button -->
+        <div class="flex items-center gap-4">
+            <button (click)="logout()"
+                class="btn-primary px-6 py-2 text-sm hover:bg-videoflix-red-dark transition-colors duration-200"
+                aria-label="Logout">
+                Logout
+            </button>
+        </div>
+    </div>
+</header>

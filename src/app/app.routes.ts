@@ -48,15 +48,22 @@ export const routes: Routes = [
     },
     {
         path: 'privacy',
-        loadComponent: () => import('./shared/components/privacy/privacy')
+        loadComponent: () => import('./features/static-pages/privacy/privacy')
             .then(m => m.PrivacyComponent),
         title: 'Datenschutz - Videoflix'
     },
     {
         path: 'imprint',
-        loadComponent: () => import('./shared/components/imprint/imprint')
+        loadComponent: () => import('./features/static-pages/imprint/imprint')
             .then(m => m.ImprintComponent),
         title: 'Impressum - Videoflix'
+    },
+    {
+        path: 'videos',
+        loadComponent: () => import('./features/videos/video-list/video-list')
+            .then(m => m.VideoListComponent),
+        canActivate: [authGuard],  // Nur für eingeloggte User!
+        title: 'Videos - Videoflix'
     },
     // Fallback - 404
     {
